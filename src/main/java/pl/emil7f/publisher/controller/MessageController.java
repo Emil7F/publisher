@@ -1,8 +1,8 @@
-package pl.emil7f.publisher;
+package pl.emil7f.publisher.controller;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.web.bind.annotation.*;
-import pl.emil7f.notification.Notification;
+import pl.emil7f.publisher.model.Notification;
 
 @RestController
 public class MessageController {
@@ -11,12 +11,6 @@ public class MessageController {
 
     public MessageController(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
-    }
-
-    @GetMapping("/message")
-    public String sendMessage(@RequestParam String message) {
-        rabbitTemplate.convertAndSend("myQueue", message);
-        return "Message added to RabbitMQ";
     }
 
     @PostMapping("/notification")
